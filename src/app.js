@@ -5,7 +5,7 @@ import {fetchRepos} from './actions';
 
 export class App extends React.Component {
     componentDidMount() {
-        //        this.props.dispatch(fetchRepos());
+        this.props.dispatch(fetchRepos());
     }
 
     render() {
@@ -15,15 +15,15 @@ export class App extends React.Component {
             return <div>Error! {this.props.error}</div>;
         }
 
-        const repos = this.props.repos.map((repo, index) => (
-            <li key={index}>{repo}</li>
+        const repoNames = this.props.repoNames.map((name, index) => (
+            <li key={index}>{name}</li>
         ));
-        return <ul>{repos}</ul>;
+        return <ul>{repoNames}</ul>;
     }
 }
 
 export const mapStateToProps = (state, props) => ({
-    repos: state.repos,
+    repoNames: state.repos.map(repo => repo.name),
     loading: state.loading,
     error: state.error
 });
